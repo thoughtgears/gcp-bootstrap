@@ -1,9 +1,15 @@
-variable "project" {
-  type        = any
-  description = "Project module itself."
+variable "organization_id" {
+  type        = string
+  description = "Google Cloud Platform Organization ID"
+}
 
-  validation {
-    condition     = contains(keys(var.project), "organization_id") && contains(keys(var.project), "id") && contains(keys(var.project), "number")
-    error_message = "You must pass 'module.project' as the value for the variable 'project'."
-  }
+variable "billing_id" {
+  type        = string
+  description = "ID of the billing account associated with the organization"
+}
+
+variable "seed_project_name" {
+  type        = string
+  description = "Name of seed project, will be concatenated with random number for seed project ID"
+  default     = "terraform"
 }
