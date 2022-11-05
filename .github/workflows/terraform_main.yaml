@@ -1,0 +1,38 @@
+name: Terraform Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    outputs:
+      terraform_version: ${{ steps.terraform.outputs.version }}
+      go_version: ${{ steps.go.outputs.version }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - id: terraform
+        run: |
+          echo "version=$(cat .tool-versions | grep 'terraform ' | cut -d ' ' -f2) >> $GITHUB_OUTPUT"
+          echo "setting terraform version to $(cat .tool-versions | grep 'terraform ' | cut -d ' ' -f2)"
+      - id: go
+        run: |
+          echo "version=$(cat .tool-versions | grep 'go ' | cut -d ' ' -f2) >> $GITHUB_OUTPUT"
+          echo "setting go version to $(cat .tool-versions | grep 'go ' | cut -d ' ' -f2)"
+
+  lint:
+    uses: thoughtgears/github-actions-workflows/.github/workflows/terraform_lint.yaml@main
+    needs: versions
+    with:
+      terraform_version: 1.3.1 # need to implement ${{ needs.versions.outputs.terraform_version }}
+
+  test:
+    uses: thoughtgears/github-actions-workflows/.github/workflows/terraform_test.yaml@main
+    needs: versions
+    with:
+      terraform_version: 1.3.1
+      go_version: '>=1.19.0'
+
