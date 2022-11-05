@@ -1,10 +1,10 @@
 locals {
   default = {
-    terraform        = true
+    terraform        = "true"
     contact          = var.contact != null ? replace(replace(replace(var.contact, "@", "-at-"), ".", "-dot-"), "_", "-") : null
     git_repository   = var.git_info ? lower(tostring(data.external.get_git_info.result.repo_name)) : null
     git_organization = var.git_info ? lower(tostring(data.external.get_git_info.result.owner)) : null
-    project          = var.project.id
+    project_name     = var.project_name
   }
 
   all_labels = var.custom != null ? merge(var.custom, local.default) : local.default

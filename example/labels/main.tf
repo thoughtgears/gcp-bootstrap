@@ -1,8 +1,6 @@
 module "labels" {
-  source = "../../modules/labels"
-  project = {
-    id = "test-1234"
-  }
+  source       = "../../modules/labels"
+  project_name = "test"
 
   git_info = true
 

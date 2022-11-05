@@ -73,3 +73,9 @@ variable "project_config" {
   EOF
 }
 
+variable "labels" {
+  type        = map(string)
+  description = "A map of key/pair values to use for project labels"
+  default     = {}
+}
+

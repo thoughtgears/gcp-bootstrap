@@ -26,7 +26,7 @@ variable "git_info" {
   default     = true
 }
 
-variable "project" {
-  type        = any
-  description = "The object from the project module"
+variable "project_name" {
+  type        = string
+  description = "Name of the project for the labels"
 }

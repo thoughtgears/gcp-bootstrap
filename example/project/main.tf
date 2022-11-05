@@ -9,6 +9,12 @@ variable "project_config" {
   })
 }
 
+module "labels" {
+  source = "../../modules/labels"
+
+  project_name = var.project_config.name
+}
+
 
 module "project" {
   source = "../../modules/project"
