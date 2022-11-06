@@ -44,7 +44,7 @@ resource "google_service_account" "terraform" {
 }
 
 resource "google_storage_bucket" "terraform_state" {
-  project       = module.project.id
+  project       = trimprefix("projects/", module.project.id)
   name          = local.state_bucket_name
   location      = var.default_region
   force_destroy = false
