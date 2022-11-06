@@ -50,6 +50,8 @@ resource "google_storage_bucket" "terraform_state" {
   location      = var.default_region
   force_destroy = false
 
+  uniform_bucket_level_access = true
+
   versioning {
     enabled = true
   }
