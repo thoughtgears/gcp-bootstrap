@@ -16,7 +16,7 @@ locals {
     "roles/resourcemanager.organizationViewer",
   ]
 
-  state_bucket_name = "tf-state-${random_id.state_bucket_suffix.id}"
+  state_bucket_name = "tf-state-${module.project.id}-${random_id.state_bucket_suffix.id}"
 }
 
 resource "random_id" "state_bucket_suffix" {
@@ -24,7 +24,7 @@ resource "random_id" "state_bucket_suffix" {
     project_id = module.project.id
   }
 
-  byte_length = 1
+  byte_length = 2
 }
 /***********************************************
   Create initial terraform seed project.
