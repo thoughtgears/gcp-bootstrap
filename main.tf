@@ -17,6 +17,7 @@ locals {
   ]
 
   state_bucket_name = "tf-state-${random_integer.state_bucket_suffix.id}"
+
 }
 
 resource "random_integer" "state_bucket_suffix" {
@@ -44,7 +45,7 @@ resource "google_service_account" "terraform" {
 }
 
 resource "google_storage_bucket" "terraform_state" {
-  project       = trimprefix("projects/", module.project.id)
+  project       = module.project.id
   name          = local.state_bucket_name
   location      = var.default_region
   force_destroy = false
