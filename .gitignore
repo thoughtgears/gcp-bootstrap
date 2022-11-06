@@ -9,7 +9,8 @@
 **/*.tfstate
 **/*.tfstate.*
 
-example/.terraform.lock.hcl
+example/**/.terraform.lock.hcl
+example/README.md
 
 # Crash log files
 crash.log

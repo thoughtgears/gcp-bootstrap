@@ -1,29 +1,20 @@
-# Should come from the project module, but will define it in the template just to show off how a test can be made
-variable "organization_id" {}
-variable "id" {}
-variable "number" {}
+module "bootstrap" {
+  source          = "../"
+  billing_id      = "XOXOXO-ABABAB-MWMWMW"
+  default_region  = "europe-west2"
+  organization_id = "12345678"
 
-locals {
-  project = {
-    organization_id = var.organization_id
-    id = var.id
-    number = var.number
-  }
+  organization_project_creators = ["user:john.doe@example.com"]
 }
 
-module "template" {
-  source = "../"
-  project = local.project
+output "project" {
+  value = "created project: ${module.bootstrap.project.id}"
 }
 
-output "id" {
-  value = module.template.project.id
+output "state_bucket" {
+  value = "created terraform state bucket: ${module.bootstrap.state_bucket}"
 }
 
-output "organization_id" {
-  value = module.template.project.organization_id
-}
-
-output "number" {
-  value = module.template.project.number
+output "terraform_service_account" {
+  value = "created a terraform service account : ${module.bootstrap.terraform_service_account_email}"
 }
