@@ -33,7 +33,7 @@ resource "random_integer" "state_bucket_suffix" {
  ***********************************************/
 
 module "project" {
-  source          = "git@github.com:thoughtgears/gcp-project-module.git?ref=v1.0.1"
+  source          = "git@github.com:thoughtgears/terraform-gcp-core.git//modules/project?ref=main"
   billing_id      = var.billing_id
   organization_id = var.organization_id
   project_config  = local.project_config
